@@ -1,34 +1,47 @@
 package LeetCode;
 
+import java.util.HashMap;
+
 public class twoSum {
 
-    public static int[] twoSum(int[] numbers, int target) {
-        if(numbers.length == 0) {
-            return new int[0];
-        } else if(numbers.length == 1) {
-            return numbers;
+    public static int[] twoSum(int[] nums, int target) {
+        int[] res = new int[2];
+        if(nums.length < 2) return res;
+
+        HashMap<Integer, Integer> mapIndex = new HashMap<>();
+
+        for(int i = 0; i < nums.length; i++) {
+            mapIndex.put(nums[i], i);
         }
 
-        int start = 0;
-        int end = numbers.length - 1;
-        int[] result = new int[2];
-        while(start <= end) {
-            int sum = numbers[start] + numbers[end];
-            if(sum < target) {
-                start++;
-            } else if(sum > target) {
-                end--;
-            } else {
-                result[0] = start + 1;
-                result[1] = end + 1;
-                break;
+        for(int j = 0; j < nums.length; j++) {
+            int diff = target - nums[j];
+            if(mapIndex.containsKey(diff) && mapIndex.get(diff) != j) {
+                res[0] = j;
+                res[1] = mapIndex.get(diff);
             }
         }
 
-        return result;
+        return res;
+
+        // One pass check
+//        Map<Integer, Integer> prevMap = new HashMap<>();
+//
+//        for (int i = 0; i < nums.length; i++) {
+//            int diff = target - nums[i];
+//
+//            if (prevMap.containsKey(diff)) {
+//                return new int[]{ prevMap.get(diff), i };
+//            }
+//            prevMap.put(nums[i], i);
+//        }
+//        return new int[0]; // Guranteed solution, no need for return
     }
     public static void main(String[] args) {
-        int[] nums = {2, 7, 11, 15};
-        int[] result = twoSum(nums, 9);
+        int[] nums = {3,2,4};
+        int[] result = twoSum(nums, 6);
+        for(int index : result) {
+            System.out.println(index);
+        }
     }
 }
