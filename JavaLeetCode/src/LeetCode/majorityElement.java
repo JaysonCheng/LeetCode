@@ -35,6 +35,25 @@ public class majorityElement {
             }
         }
         return num;
+
+        // HashMap solution
+//        if(nums.length == 1) {
+//            return nums[0];
+//        }
+//
+//        HashMap<Integer, Integer> map = new HashMap<>();
+//        for(int i : nums) {
+//            if(!map.containsKey(i)) {
+//                map.put(i , 1);
+//            } else {
+//                int count = map.get(i) + 1;
+//                if(count > (nums.length / 2)) {
+//                    return i;
+//                }
+//                map.put(i, count);
+//            }
+//        }
+//        return 0;
     }
 
     public static void main(String[] args) {
